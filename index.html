@@ -3,35 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Professional Calculator | Yassir Rzigui</title>
+    <meta name="description" content="Advanced calculator with scientific functions, history, and dark mode - Built by Yassir Rzigui">
+    <meta name="author" content="Yassir Rzigui">
+    <meta name="keywords" content="calculator, scientific calculator, math, javascript, web app">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="calculator">
-            <input type="text" id="display">
-            <div class="buttons">
-                <button onclick="clearDisplay()">C</button>
-                <button onclick="deleteLast()">DEL</button>
-                <button onclick="appendNumber('9')">9</button>
-                <button onclick="appendNumber('8')">8</button>
-                <button onclick="appendNumber('7')">7</button>
-                <button onclick="appendNumber('6')">6</button>
-                <button onclick="appendNumber('5')">5</button>
-                <button onclick="appendNumber('4')">4</button>
-                <button onclick="appendNumber('3')">3</button>
-                <button onclick="appendNumber('2')">2</button>
-                <button onclick="appendNumber('1')">1</button>
-                <button onclick="appendNumber('0')">0</button>
-                <button onclick="appendNumber('.')">.</button>
-                <button onclick="appendOperator('+')">+</button>
-                <button onclick="appendOperator('-')">-</button>
-                <button onclick="appendOperator('*')">*</button>
-                <button onclick="appendOperator('/')">/</button>
-                <button onclick="calculate()">=</button>
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>Professional Calculator</h1>
+        <p>Built by Yassir Rzigui - Full-Stack Developer & AI Specialist</p>
+    </header>
+
+    <div class="app-container">
+        <!-- Calculator -->
+        <div class="calculator-container">
+            <div class="calculator">
+                <!-- Display -->
+                <div class="display-container">
+                    <div id="history-display" class="history-display"></div>
+                    <input type="text" id="display" class="main-display" readonly placeholder="0">
+                </div>
+
+                <!-- Mode Toggle -->
+                <div class="mode-toggle">
+                    <button id="basic-mode" class="mode-btn active">Basic</button>
+                    <button id="scientific-mode" class="mode-btn">Scientific</button>
+                </div>
+
+                <!-- Basic Calculator Buttons -->
+                <div class="buttons basic-buttons">
+                    <button class="btn function-btn" data-action="clear">C</button>
+                    <button class="btn function-btn" data-action="delete">⌫</button>
+                    <button class="btn function-btn" data-action="percent">%</button>
+                    <button class="btn operator-btn" data-operator="/">/</button>
+
+                    <button class="btn number-btn" data-number="7">7</button>
+                    <button class="btn number-btn" data-number="8">8</button>
+                    <button class="btn number-btn" data-number="9">9</button>
+                    <button class="btn operator-btn" data-operator="*">×</button>
+
+                    <button class="btn number-btn" data-number="4">4</button>
+                    <button class="btn number-btn" data-number="5">5</button>
+                    <button class="btn number-btn" data-number="6">6</button>
+                    <button class="btn operator-btn" data-operator="-">−</button>
+
+                    <button class="btn number-btn" data-number="1">1</button>
+                    <button class="btn number-btn" data-number="2">2</button>
+                    <button class="btn number-btn" data-number="3">3</button>
+                    <button class="btn operator-btn" data-operator="+">+</button>
+
+                    <button class="btn number-btn zero" data-number="0">0</button>
+                    <button class="btn number-btn" data-number=".">.</button>
+                    <button class="btn equals-btn" data-action="calculate">=</button>
+                </div>
+
+                <!-- Scientific Calculator Buttons -->
+                <div class="buttons scientific-buttons" style="display: none;">
+                    <button class="btn function-btn" data-action="clear">C</button>
+                    <button class="btn function-btn" data-action="delete">⌫</button>
+                    <button class="btn function-btn" data-function="sin">sin</button>
+                    <button class="btn function-btn" data-function="cos">cos</button>
+                    <button class="btn function-btn" data-function="tan">tan</button>
+
+                    <button class="btn function-btn" data-function="log">log</button>
+                    <button class="btn function-btn" data-function="ln">ln</button>
+                    <button class="btn function-btn" data-function="sqrt">√</button>
+                    <button class="btn function-btn" data-function="pow">x²</button>
+                    <button class="btn function-btn" data-function="factorial">!</button>
+
+                    <button class="btn number-btn" data-number="7">7</button>
+                    <button class="btn number-btn" data-number="8">8</button>
+                    <button class="btn number-btn" data-number="9">9</button>
+                    <button class="btn operator-btn" data-operator="/">/</button>
+                    <button class="btn function-btn" data-function="pi">π</button>
+
+                    <button class="btn number-btn" data-number="4">4</button>
+                    <button class="btn number-btn" data-number="5">5</button>
+                    <button class="btn number-btn" data-number="6">6</button>
+                    <button class="btn operator-btn" data-operator="*">×</button>
+                    <button class="btn function-btn" data-function="e">e</button>
+
+                    <button class="btn number-btn" data-number="1">1</button>
+                    <button class="btn number-btn" data-number="2">2</button>
+                    <button class="btn number-btn" data-number="3">3</button>
+                    <button class="btn operator-btn" data-operator="-">−</button>
+                    <button class="btn function-btn" data-action="parentheses">()</button>
+
+                    <button class="btn number-btn zero" data-number="0">0</button>
+                    <button class="btn number-btn" data-number=".">.</button>
+                    <button class="btn operator-btn" data-operator="+">+</button>
+                    <button class="btn equals-btn" data-action="calculate">=</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel">
+            <div class="history-header">
+                <h3>History</h3>
+                <button id="clear-history" class="clear-history-btn">Clear</button>
+            </div>
+            <div id="history-list" class="history-list">
+                <p class="no-history">No calculations yet</p>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Yassir Rzigui - Full-Stack Developer & AI Specialist</p>
+        <div class="social-links">
+            <a href="mailto:rziguiyassir@gmail.com">📧 Email</a>
+            <a href="https://linkedin.com/in/yassir-rzigui" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/yazzy01" target="_blank">🐙 GitHub</a>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
+    <script src="scientific-functions.js"></script>
+    <script src="theme-manager.js"></script>
 </body>
 </html>
